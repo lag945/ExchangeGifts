@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: lightblue;
+        }
+
+        h1 {
+            color: white;
+
+        }
+
+        p {
+            font-family: verdana;
+            font-size: 20px;
+        }
+
+        label {
+            text-align: center;
+        }
+
+        input {
+            text-align: center;
+        }
+
+        div.minimalistBlack {
+            border: 3px solid #000000;
+            width: 80%;
+            text-align: left;
+            border-collapse: collapse;
+        }
+
+        .divTable.minimalistBlack .divTableCell,
+        .divTable.minimalistBlack .divTableHead {
+            border: 1px solid #000000;
+            padding: 5px 4px;
+        }
+
+        .divTable.minimalistBlack .divTableBody .divTableCell {
+            font-size: 13px;
+        }
+
+        .divTable.minimalistBlack .divTableHeading {
+            background: #CFCFCF;
+            background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+            background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+            background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
+            border-bottom: 3px solid #000000;
+        }
+
+        .divTable.minimalistBlack .divTableHeading .divTableHead {
+            font-size: 15px;
+            font-weight: bold;
+            color: #000000;
+            text-align: left;
+        }
+
+        .minimalistBlack .tableFootStyle {
+            font-size: 14px;
+            font-weight: bold;
+            color: #000000;
+            border-top: 3px solid #000000;
+        }
+
+        .minimalistBlack .tableFootStyle {
+            font-size: 14px;
+        }
+
+        /* DivTable.com */
+        .divTable {
+            display: table;
+        }
+
+        .divTableRow {
+            display: table-row;
+        }
+
+        .divTableHeading {
+            display: table-header-group;
+        }
+
+        .divTableCell,
+        .divTableHead {
+            display: table-cell;
+        }
+
+        .divTableHeading {
+            display: table-header-group;
+        }
+
+        .divTableFoot {
+            display: table-footer-group;
+        }
+
+        .divTableBody {
+            display: table-row-group;
+        }
+    </style>
+</head>
+<title>交換禮物</title>
+
+<body onload="init()">
+    <h1>
+        <p id='question'></p>
+    </h1>
+
+    <p>
+        <button onclick="next()">下一位</button>
+    </p>	
+    <p><label for="number">交換人數:</label>
+        <input type="text" id="number" name="number">
+        <button onclick="sumit()">送出</button>
+    </p>
+    <div class="divTable minimalistBlack">
+        <div class="divTableHeading">
+            <div class="divTableRow">
+                <div class="divTableHead">回合</div>
+                <div class="divTableHead">抽獎編號</div>
+                <div class="divTableHead">禮物編號</div>
+				<div class="divTableHead">抽出時間</div>
+            </div>
+        </div>
+        <div class="divTableBody" id='test_record'>
+            <div class="divTableRow">
+                <div class="divTableCell"></div>
+                <div class="divTableCell"></div>
+                <div class="divTableCell"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+	let recordHTML = "";
+	let candidates = [];
+	let round = 0;
+    function init() {
+    }
+
+    function generateCandidates(size) {
+		candidates.length = 0;
+		for(let i=0;i<size;i++)
+			candidates.push(0);
+		let zeroIndex = 0;
+
+		//swap every candidates randomly.
+		for (let i = 0; i < candidates.length; i++)
+		{
+			if (i != zeroIndex && candidates[i] == 0)//Initialize
+				candidates[i] = i;
+
+			let target = Math.floor(Math.random() * size);
+			if (target != zeroIndex && candidates[target] == 0)//Initialize
+				candidates[target] = target;
+
+			if (i == zeroIndex)
+				zeroIndex = target;
+			else if (target == zeroIndex)
+				zeroIndex = i;
+				
+		   let temp = candidates[i];
+			candidates[i] = candidates[target];
+			candidates[target] = temp;					
+		}
+    }	
+
+    function clear() {	
+		recordHTML = "";
+		test_record.innerHTML = recordHTML;	
+		round = 0;
+    }
+
+    function sumit() {
+        let number = parseInt(document.getElementById("number").value);
+		clear();
+		generateCandidates(number);		
+    }
+	
+	function next() {
+		if(round>=candidates.length)
+			return;
+			
+		let from = candidates[round]+1;
+		let to = candidates[0]+1;
+		if(round < candidates.length-1)
+			to = candidates[round+1]+1;
+			
+		let test_record = document.getElementById("test_record");		
+        let log = "<div class='divTableRow'>";
+        log += "<div class='divTableCell'>" + (round+1) + "</div>";
+
+		log += "<div class='divTableCell'>" + "<p style='color:green;'>" + from + "</p>" + "</div>";
+		log += "<div class='divTableCell'>" + "<p style='color:red;'>" + to + "</p>" + "</div>";
+        const date = new Date();
+        log += "<div class='divTableCell'>" + date.toISOString() + "</div>";
+        log += "</div>";
+        recordHTML = log + recordHTML;
+
+        test_record.innerHTML = recordHTML;	
+		
+		round++;
+	}
+</script>
+
+</html>
