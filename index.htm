@@ -2,110 +2,49 @@
 <html>
 
 <head>
-    <style>
-        body {
-            background-color: lightblue;
-        }
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
-        h1 {
-            color: white;
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
 
-        }
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
 
-        p {
-            font-family: verdana;
-            font-size: 20px;
-        }
-
-        label {
-            text-align: center;
-        }
-
-        input {
-            text-align: center;
-        }
-
-        div.minimalistBlack {
-            border: 3px solid #000000;
-            width: 80%;
-            text-align: left;
-            border-collapse: collapse;
-        }
-
-        .divTable.minimalistBlack .divTableCell,
-        .divTable.minimalistBlack .divTableHead {
-            border: 1px solid #000000;
-            padding: 5px 4px;
-        }
-
-        .divTable.minimalistBlack .divTableBody .divTableCell {
-            font-size: 13px;
-        }
-
-        .divTable.minimalistBlack .divTableHeading {
-            background: #CFCFCF;
-            background: -moz-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: -webkit-linear-gradient(top, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            background: linear-gradient(to bottom, #dbdbdb 0%, #d3d3d3 66%, #CFCFCF 100%);
-            border-bottom: 3px solid #000000;
-        }
-
-        .divTable.minimalistBlack .divTableHeading .divTableHead {
-            font-size: 15px;
-            font-weight: bold;
-            color: #000000;
-            text-align: left;
-        }
-
-        .minimalistBlack .tableFootStyle {
-            font-size: 14px;
-            font-weight: bold;
-            color: #000000;
-            border-top: 3px solid #000000;
-        }
-
-        .minimalistBlack .tableFootStyle {
-            font-size: 14px;
-        }
-
-        /* DivTable.com */
-        .divTable {
-            display: table;
-        }
-
-        .divTableRow {
-            display: table-row;
-        }
-
-        .divTableHeading {
-            display: table-header-group;
-        }
-
-        .divTableCell,
-        .divTableHead {
-            display: table-cell;
-        }
-
-        .divTableHeading {
-            display: table-header-group;
-        }
-
-        .divTableFoot {
-            display: table-footer-group;
-        }
-
-        .divTableBody {
-            display: table-row-group;
-        }
-    </style>
+  <!-- Custom styles for this template -->
+  <link href="headers.css" rel="stylesheet">
+  <link href="footers.css" rel="stylesheet">
 </head>
 <title>交換禮物</title>
 
 <body onload="init()">
-    <h1>
-        <p id='question'></p>
-    </h1>
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32">
+          <use xlink:href="#bootstrap" />
+        </svg>
+        <span class="fs-4">交換禮物</span>
+      </a>
 
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="./index.htm" class="nav-link active" aria-current="page">重置</a></li>
+      </ul>
+    </header>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <p id="data_summary"></p>
     <p>
         <button onclick="next()">下一位</button>
     </p>	
@@ -113,23 +52,38 @@
         <input type="text" id="number" name="number">
         <button onclick="sumit()">送出</button>
     </p>
-    <div class="divTable minimalistBlack">
-        <div class="divTableHeading">
-            <div class="divTableRow">
-                <div class="divTableHead">回合</div>
-                <div class="divTableHead">抽獎編號</div>
-                <div class="divTableHead">禮物編號</div>
-				<div class="divTableHead">抽出時間</div>
-            </div>
-        </div>
-        <div class="divTableBody" id='test_record'>
-            <div class="divTableRow">
-                <div class="divTableCell"></div>
-                <div class="divTableCell"></div>
-                <div class="divTableCell"></div>
-            </div>
-        </div>
-    </div>
+	  
+      <div class="table-responsive">
+        <table class="table table-striped" style="width:100%;text-align:center">
+          <thead>
+            <tr>
+              <th scope="col">回合</th>
+              <th scope="col">抽獎編號</th>
+              <th scope="col">禮物編號</th>
+              <th scope="col">抽出時間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <p class="col-md-4 mb-0 text-muted">&copy; 2021 Laguna Du</p>
+    </footer>
+  </div>
+
+  <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js" crossorigin="anonymous"></script>
 
 </body>
 
@@ -168,8 +122,8 @@
     }	
 
     function clear() {	
-		recordHTML = "";
-		test_record.innerHTML = recordHTML;	
+		//recordHTML = "";
+		//test_record.innerHTML = recordHTML;	
 		round = 0;
     }
 
@@ -188,18 +142,17 @@
 		if(round < candidates.length-1)
 			to = candidates[round+1]+1;
 			
-		let test_record = document.getElementById("test_record");		
-        let log = "<div class='divTableRow'>";
-        log += "<div class='divTableCell'>" + (round+1) + "</div>";
-
-		log += "<div class='divTableCell'>" + "<p style='color:green;'>" + from + "</p>" + "</div>";
-		log += "<div class='divTableCell'>" + "<p style='color:red;'>" + to + "</p>" + "</div>";
-        const date = new Date();
-        log += "<div class='divTableCell'>" + date.toISOString() + "</div>";
-        log += "</div>";
-        recordHTML = log + recordHTML;
-
-        test_record.innerHTML = recordHTML;	
+		const date = new Date();
+		let html = "";
+		html += "<tr>";
+		html += "<td>" + String(round+1) + "</td>";
+		html += "<td>" + String(from) + "</td>";
+		html += "<td>" + String(to) + "</td>";
+		html += "<td>" + String(date.toISOString()) + "</td>";
+		html += "</tr>";
+          
+		$("table tbody").prepend(html);		
+		
 		
 		round++;
 	}
