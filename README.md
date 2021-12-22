@@ -1,5 +1,5 @@
-# ExchangePresents
-Exchange presents and NO bugs :)
+# ExchangeGifts
+Exchange gifts and NO bugs :)
 
 # [Online Demo](https://lag945.github.io/ExchangePresents/index.htm)
 
