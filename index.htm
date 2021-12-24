@@ -46,7 +46,7 @@
     <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <p id="data_summary"></p>
     <p>
-        <button onclick="next()">下一位</button><button onclick="listAll(500)">全列</button>
+        <button onclick="next()">下一位</button><button onclick="listAll()">全列</button>
     </p>	
     <p><label for="number">交換人數:</label>
         <input type="text" id="number" name="number">
@@ -159,11 +159,25 @@
 		return true;
 	}
 	
-	function listAll(max) {	
-		while(next() && max>1)
-		{
-			max--;
+	function listAll() {	
+	
+		let data = [];
+		const date = new Date();
+		let isoString = String(date.toISOString());
+		while(round<candidates.length) {			
+			let from = candidates[round]+1;
+			let to = candidates[0]+1;
+			if(round < candidates.length-1)
+				to = candidates[round+1]+1;
+				
+			let html = "";
+			html = html.concat("<tr>","<td>",String(round+1),"</td>","<td>",String(from),"</td>","<td>",String(to),"</td>","<td>",isoString,"</td>","</tr>");
+			data.push(html);			 
+			round++;
 		}
+		data.reverse();
+		console.log(data.join(''));
+		$("table tbody").prepend(data.join(''));	
 	}	
 </script>
 
