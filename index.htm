@@ -40,6 +40,7 @@
 
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="./index.htm" class="nav-link active" aria-current="page">重置</a></li>
+		<li class="nav-item"><a href="javascript:exportAll()" class="nav-link active" aria-current="page">匯出</a></li>
       </ul>
     </header>
 
@@ -179,6 +180,31 @@
 		console.log(data.join(''));
 		$("table tbody").prepend(data.join(''));	
 	}	
+	
+	function exportAll() {
+		var a = window.document.createElement('a');
+		let data = [];
+		data.push("no,from,to");
+		
+		for(let i=0;i<candidates.length;i++) {
+			let from = candidates[i]+1;
+			let to = candidates[0]+1;
+			if(i < candidates.length-1)
+				to = candidates[i+1]+1;
+				
+			data.push("\r\n"+ String(i+1) + "," + String(from) + "," + String(to));
+		}		
+		
+		a.href = window.URL.createObjectURL(new Blob(data, {type: 'text/csv'}));
+		a.download = 'export.csv';
+
+		// Append anchor to body.
+		document.body.appendChild(a);
+		a.click();
+
+		// Remove anchor from body
+		document.body.removeChild(a);
+	}
 </script>
 
 </html>
